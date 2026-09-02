@@ -11,15 +11,24 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
+    /**
+     * Default admin for local / Railway (change password in production).
+     *
+     * Email: admin@voting.test
+     * Password: Admin123!
+     */
     public function run(): void
     {
-        if (!User::where('email', 'CallmeEthi.com')->exists()) {
-            User::create([
+        // Remove legacy broken admin row (invalid email format).
+        User::query()->where('email', 'CallmeEthi.com')->delete();
+
+        User::updateOrCreate(
+            ['email' => 'admin@voting.test'],
+            [
                 'name' => 'Admin',
-                'email' => 'CallmeEthi.com',
-                'password' => Hash::make('123456'),
+                'password' => Hash::make('Admin123!'),
                 'role' => 'admin',
-            ]);
-        }
+            ]
+        );
     }
 }

@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
+
+import 'theme/app_theme.dart';
 import 'screens/login_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const VotingApp());
 }
 
-ValueNotifier<bool> isDark = ValueNotifier(false);
+class VotingApp extends StatelessWidget {
+  const VotingApp({super.key});
 
-class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: isDark,
-      builder: (_, value, __) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: value ? ThemeData.dark() : ThemeData.light(),
-          home: LoginScreen(),
-        );
-      },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppVotingTheme.dark(),
+      home: const LoginScreen(),
     );
   }
 }

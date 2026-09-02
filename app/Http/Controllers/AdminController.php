@@ -57,7 +57,17 @@ class AdminController extends Controller
             VotingSetting::query()->delete();
 
             foreach ($symbols as $symbol) {
-                Storage::disk('public')->delete($symbol);
+                if (! is_string($symbol) || $symbol === '') {
+                    continue;
+                }
+                // Symbols are usually base64 in DB; only delete real storage paths.
+                if (str_starts_with($symbol, 'data:') || str_starts_with($symbol, 'http://') || str_starts_with($symbol, 'https://')) {
+                    continue;
+                }
+                $path = ltrim($symbol, '/');
+                if ($path !== '' && ! str_contains($path, '..')) {
+                    Storage::disk('public')->delete($path);
+                }
             }
         });
 

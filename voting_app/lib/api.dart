@@ -1,7 +1,7 @@
 class Api {
   static const String baseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'https://online-voting-system-production-4f0b.up.railway.app'
+    defaultValue: 'http://localhost:8000',
   );
 
   static Uri uri(String path) {

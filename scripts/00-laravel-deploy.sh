@@ -15,6 +15,11 @@ mkdir -p /var/www/html/storage/framework/views
 mkdir -p /var/www/html/storage/logs
 chmod -R 775 /var/www/html/storage
 
+echo "Clearing old caches..."
+php artisan config:clear
+php artisan route:clear
+php artisan cache:clear
+
 echo "Caching config..."
 php artisan config:cache
 

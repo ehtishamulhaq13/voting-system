@@ -3,6 +3,9 @@
 echo "Running composer"
 composer install --no-dev --working-dir=/var/www/html
 
+mkdir -p /var/www/html/database
+touch /var/www/html/database/database.sqlite
+
 echo "Caching config..."
 php artisan config:cache
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Running composer"
+sed -i 's|try_files $uri $uri/ =404;|try_files $uri $uri/ /index.php?$query_string;|' /etc/nginx/sites-enabled/default.conf
 composer install --no-dev --working-dir=/var/www/html
 
 echo "Setting up SQLite database..."

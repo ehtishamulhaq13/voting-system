@@ -5,6 +5,10 @@ composer install --no-dev --working-dir=/var/www/html
 
 mkdir -p /var/www/html/database
 touch /var/www/html/database/database.sqlite
+
+chmod -R 775 /var/www/html/database
+chown -R nginx:nginx /var/www/html/database
+
 mkdir -p /var/www/html/storage/framework/cache/data
 mkdir -p /var/www/html/storage/framework/sessions
 mkdir -p /var/www/html/storage/framework/views
